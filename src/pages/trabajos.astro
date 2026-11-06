@@ -1,0 +1,73 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
+import CtaPanel from '../components/CtaPanel.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { projects } from '../data/site';
+
+const categories = ['all', ...new Set(projects.map((p) => p.category))] as const;
+const categoryLabels: Record<string, string> = { all: 'Todos' };
+---
+
+<BaseLayout
+  path="/trabajos"
+  title="Mis Trabajos"
+  description="Portafolio de Dua Marketing: gestión de redes sociales, branding, diseño gráfico y campañas de publicidad digital. Proyectos con resultados medibles."
+>
+
+  {/* ══════════ HERO DE PÁGINA ══════════ */}
+  <section class="page-hero">
+    <div class="container">
+      <p class="eyebrow">Portafolio</p>
+      <h1 class="section-title">Mis <em>proyectos</em></h1>
+      <p class="section-sub">
+        Una muestra del trabajo: estrategia, contenido y publicidad que movieron la aguja.
+        Haz clic en cada tarjeta para ver el resumen.
+      </p>
+    </div>
+  </section>
+
+  {/* ══════════ GRID + FILTROS ══════════ */}
+  <section class="section" aria-label="Listado de proyectos">
+    <div class="container">
+      <div class="filters" role="group" aria-label="Filtrar proyectos por categoría">
+        {categories.map((category, i) => (
+          <button
+            class:list={['filter-btn', { 'is-active': i === 0 }]}
+            data-filter={category}
+            aria-pressed={i === 0 ? 'true' : 'false'}
+          >
+            {categoryLabels[category] ?? category}
+          </button>
+        ))}
+      </div>
+
+      <div class="works-grid" id="worksGrid">
+        {projects.map((project) => <ProjectCard project={project} />)}
+      </div>
+    </div>
+  </section>
+
+  {/* ══════════ LIGHTBOX ══════════ */}
+  <dialog class="lightbox" id="workLightbox" aria-label="Detalle del proyecto">
+    <button class="lightbox__close" data-lb-close aria-label="Cerrar">
+      <Icon name="x" size={20} />
+    </button>
+    <figure>
+      <img data-lb-image src="" alt="" width="1200" height="520" />
+      <figcaption>
+        <h3 data-lb-title></h3>
+        <p data-lb-summary></p>
+        <p class="lightbox__result"><span aria-hidden="true">↗</span> <span data-lb-result></span></p>
+      </figcaption>
+    </figure>
+  </dialog>
+
+  {/* ══════════ CTA ══════════ */}
+  <section class="section" style="padding-top: 0;" aria-label="Llamada a la acción">
+    <div class="container">
+      <CtaPanel title="¿Tu marca será el próximo caso de éxito?" subtitle="Hablemos de tu proyecto y armemos un plan a la medida de tus objetivos." />
+    </div>
+  </section>
+
+</BaseLayout>

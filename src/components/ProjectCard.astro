@@ -1,0 +1,34 @@
+---
+import Icon from './Icon.astro';
+import type { Project } from '../data/site';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+---
+
+<button
+  class="work-card reveal"
+  data-category={project.category}
+  data-lightbox
+  data-title={project.title}
+  data-summary={project.summary}
+  data-result={project.result}
+  data-image={project.image}
+  aria-label={`Ver proyecto: ${project.title}`}
+>
+  <div class="work-card__img">
+    <span class="work-card__year">{project.year}</span>
+    <img src={project.image} alt={project.alt} loading="lazy" decoding="async" width="1200" height="800" />
+  </div>
+  <div class="work-card__body">
+    <span class="work-card__cat">{project.category}</span>
+    <h3>{project.title}</h3>
+    <span class="work-card__result">
+      <Icon name="trending" size={14} strokeWidth={2} />
+      {project.result}
+    </span>
+  </div>
+</button>

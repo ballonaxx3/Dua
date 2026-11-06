@@ -1,0 +1,187 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
+import CtaPanel from '../components/CtaPanel.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { site, goals, services, projects, testimonials } from '../data/site';
+
+const featuredProjects = projects.slice(0, 3);
+const previewServices = services.slice(0, 6);
+---
+
+<BaseLayout path="/" title="Inicio">
+
+  {/* ══════════ HERO ══════════ */}
+  <section class="hero" aria-label="Presentación de Dua Marketing">
+    <div class="container hero__inner">
+      <div class="hero__copy">
+        <span class="hero__badge"><span class="dot"></span>Disponible para nuevos proyectos</span>
+
+        <h1 class="hero__title">
+          Tu marca merece<br />ser <em>inolvidable.</em>
+        </h1>
+
+        <p class="hero__sub">
+          Estrategia, contenido y publicidad digital para que tu negocio deje de pasar desapercibido y empiece a crecer en serio.
+        </p>
+
+        <div class="hero__ctas">
+          <a href="/contacto" class="btn btn--gold">
+            Agenda tu consulta gratis
+            <Icon name="arrowRight" size={18} strokeWidth={2} />
+          </a>
+          <a href="/trabajos" class="btn btn--ghost">Ver mis trabajos</a>
+        </div>
+
+        <div class="hero__trust">
+          <div class="hero__avatars" aria-hidden="true">
+            <span>MF</span><span>DS</span><span>CT</span><span>+50</span>
+          </div>
+          <p><strong>+50 marcas</strong> confían en nosotros<br />para crecer en redes</p>
+        </div>
+      </div>
+
+      <div class="hero__visual">
+        <svg class="orbit" viewBox="0 0 118 118" aria-hidden="true">
+          <defs>
+            <path id="circlePath" d="M 59,59 m -50,0 a 50,50 0 1,1 100,0 a 50,50 0 1,1 -100,0" />
+          </defs>
+          <text>
+            <textPath href="#circlePath">Dua Marketing · Estrategia · Contenido · Diseño · Publicidad ·&#160;</textPath>
+          </text>
+        </svg>
+        <div class="orbit__core" aria-hidden="true">
+          <span><Icon name="sparkles" size={20} strokeWidth={1.6} /></span>
+        </div>
+
+        <div class="arch__glow" aria-hidden="true"></div>
+
+        <figure class="arch">
+          <div class="arch__inner">
+            <img
+              src="/profecional.png"
+              alt="Profesional de Dua Marketing, especialista en estrategia y redes sociales"
+              width="680"
+              height="980"
+              fetchpriority="high"
+            />
+          </div>
+        </figure>
+
+        <div class="float-card float-card--1" aria-hidden="true">
+          <strong>+10K</strong>
+          <small>seguidores en Instagram</small>
+        </div>
+        <div class="float-card float-card--2" aria-hidden="true">
+          <strong>+320%</strong>
+          <small>engagement promedio</small>
+        </div>
+
+        <a class="handle-chip" href={site.instagram} target="_blank" rel="noopener noreferrer">
+          <Icon name="instagram" size={16} />
+          {site.handle}
+          <span class="verified">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 12.5 5 5L19.5 6"/></svg>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {/* ══════════ MARQUEE ══════════ */}
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      <span>Estrategia de Contenidos <i>✦</i> Redes Sociales <i>✦</i> Branding <i>✦</i> Diseño Gráfico <i>✦</i> Publicidad Digital <i>✦</i> Consultoría <i>✦</i></span>
+      <span>Estrategia de Contenidos <i>✦</i> Redes Sociales <i>✦</i> Branding <i>✦</i> Diseño Gráfico <i>✦</i> Publicidad Digital <i>✦</i> Consultoría <i>✦</i></span>
+    </div>
+  </div>
+
+  {/* ══════════ METAS 2026 ══════════ */}
+  <section class="section" aria-labelledby="metas-title">
+    <div class="container">
+      <p class="eyebrow reveal">Metas 2026</p>
+      <h2 id="metas-title" class="section-title reveal" data-delay="1">Los números que<br /><em>respaldan el trabajo</em></h2>
+
+      <div class="goals-grid" style="margin-top: 2.5rem;">
+        {goals.map((goal, i) => (
+          <div class="goal-card reveal" data-delay={String((i % 3) + 1)}>
+            <strong>{goal.value}</strong>
+            <span>{goal.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* ══════════ SERVICIOS (preview) ══════════ */}
+  <section class="section section--surface" aria-labelledby="servicios-title">
+    <div class="container">
+      <div class="section__head">
+        <div>
+          <p class="eyebrow reveal">Servicios</p>
+          <h2 id="servicios-title" class="section-title reveal" data-delay="1">Todo lo que tu marca<br /><em>necesita, en un lugar</em></h2>
+        </div>
+        <a href="/servicios" class="section__link reveal" data-delay="2">Ver todos los servicios <Icon name="arrowRight" size={15} strokeWidth={2.2} /></a>
+      </div>
+
+      <div class="services-grid">
+        {previewServices.map((service) => (
+          <a href="/servicios" class="service-card reveal" aria-label={`Servicio: ${service.title}`}>
+            <div class="service-card__icon"><Icon name={service.icon} size={24} /></div>
+            <h3>{service.title}</h3>
+            <p>{service.desc.split('.')[0]}.</p>
+            <span class="service-card__more">Saber más <Icon name="arrowRight" size={14} strokeWidth={2.2} /></span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* ══════════ TRABAJOS DESTACADOS ══════════ */}
+  <section class="section" aria-labelledby="trabajos-title">
+    <div class="container">
+      <div class="section__head">
+        <div>
+          <p class="eyebrow reveal">Portafolio</p>
+          <h2 id="trabajos-title" class="section-title reveal" data-delay="1">Proyectos que<br /><em>hablan por sí solos</em></h2>
+        </div>
+        <a href="/trabajos" class="section__link reveal" data-delay="2">Ver portafolio completo <Icon name="arrowRight" size={15} strokeWidth={2.2} /></a>
+      </div>
+
+      <div class="works-grid">
+        {featuredProjects.map((project) => <ProjectCard project={project} />)}
+      </div>
+    </div>
+  </section>
+
+  {/* ══════════ TESTIMONIOS ══════════ */}
+  <section class="section section--surface" aria-labelledby="testimonios-title">
+    <div class="container">
+      <p class="eyebrow reveal">Prueba social</p>
+      <h2 id="testimonios-title" class="section-title reveal" data-delay="1">Marcas que <em>ya crecieron</em><br />con Dua</h2>
+
+      <div class="testimonials" style="margin-top: 2.5rem;">
+        {testimonials.map((t) => (
+          <figure class="testimonial reveal">
+            <div class="testimonial__stars" aria-label="5 de 5 estrellas">
+              {[1, 2, 3, 4, 5].map(() => <Icon name="star" size={15} />)}
+            </div>
+            <blockquote>“{t.quote}”</blockquote>
+            <figcaption class="testimonial__who">
+              <span aria-hidden="true">{t.initials}</span>
+              <span><strong>{t.name}</strong><small>{t.role}</small></span>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* ══════════ CTA FINAL ══════════ */}
+  <section class="section" aria-label="Llamada a la acción">
+    <div class="container">
+      <CtaPanel />
+    </div>
+  </section>
+
+</BaseLayout>

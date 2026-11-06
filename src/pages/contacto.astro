@@ -1,0 +1,111 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../data/site';
+
+const contactCards = [
+  { icon: 'mail', label: 'Correo', value: site.email, href: `mailto:${site.email}` },
+  { icon: 'instagram', label: 'Instagram', value: site.handle, href: site.instagram, external: true },
+  { icon: 'clock', label: 'Horario de atención', value: site.hours },
+  { icon: 'zap', label: 'Respuesta rápida', value: `Te respondo en ${site.responseTime}` },
+];
+---
+
+<BaseLayout
+  path="/contacto"
+  title="Contacto"
+  description="Agenda una consulta gratuita con Dua Marketing. Completa el formulario o escríbenos por correo e Instagram. Respuesta en menos de 24h."
+>
+
+  {/* ══════════ HERO DE PÁGINA ══════════ */}
+  <section class="page-hero">
+    <div class="container">
+      <p class="eyebrow">Contacto</p>
+      <h1 class="section-title">Hablemos de<br /><em>tu proyecto</em></h1>
+      <p class="section-sub">
+        Cuéntame a dónde quieres llevar tu marca y te propongo un plan.
+        La primera consulta es gratuita y sin compromiso.
+      </p>
+    </div>
+  </section>
+
+  {/* ══════════ GRID: INFO + FORMULARIO ══════════ */}
+  <section class="section" style="padding-top: 3.5rem;" aria-label="Datos de contacto y formulario">
+    <div class="container contact-grid">
+
+      {/* Izquierda: datos */}
+      <div>
+        <h2 class="eyebrow" style="margin-bottom: .5rem;">Datos directos</h2>
+        <p class="section-sub" style="margin-top: 0;">Elige el canal que prefieras — leo todo personalmente.</p>
+
+        <div class="contact-cards">
+          {contactCards.map((card) =>
+            card.href ? (
+              <a class="contact-card" href={card.href} {...(card.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
+                <span class="contact-card__icon"><Icon name={card.icon} size={21} /></span>
+                <span><small>{card.label}</small><strong>{card.value}</strong></span>
+              </a>
+            ) : (
+              <div class="contact-card">
+                <span class="contact-card__icon"><Icon name={card.icon} size={21} /></span>
+                <span><small>{card.label}</small><strong>{card.value}</strong></span>
+              </div>
+            )
+          )}
+        </div>
+
+        <p class="form-note" style="text-align: left; margin-top: 1.5rem;">
+          ¿Prefieres algo más directo? Escríbeme un DM en Instagram — suelo responder el mismo día.
+        </p>
+      </div>
+
+      {/* Derecha: formulario */}
+      <div class="form-card">
+        <h2 style="font-family: var(--font-display); font-size: 1.4rem; margin-bottom: 1.2rem;">Envíame un mensaje</h2>
+
+        <form id="contactForm" action={site.formspreeEndpoint} method="POST">
+          {/* Honeypot anti-spam (Formspree) */}
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="sr-only" aria-hidden="true" />
+          <input type="hidden" name="_subject" value="Nuevo contacto desde el sitio web — Dua Marketing" />
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="nombre">Nombre completo <i aria-hidden="true">*</i></label>
+              <input class="form-input" type="text" id="nombre" name="nombre" placeholder="Tu nombre" required autocomplete="name" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="email">Correo electrónico <i aria-hidden="true">*</i></label>
+              <input class="form-input" type="email" id="email" name="email" placeholder="tu@email.com" required autocomplete="email" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="telefono">Teléfono <i aria-hidden="true">*</i></label>
+              <input class="form-input" type="tel" id="telefono" name="telefono" placeholder="Ej: 999 888 777" required autocomplete="tel" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="empresa">Empresa <span style="color: var(--muted); font-weight: 400;">(opcional)</span></label>
+              <input class="form-input" type="text" id="empresa" name="empresa" placeholder="Nombre de tu empresa" autocomplete="organization" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="mensaje">Cuéntame sobre tu proyecto <i aria-hidden="true">*</i></label>
+            <textarea class="form-textarea" id="mensaje" name="mensaje" placeholder="Objetivos, redes actuales, presupuesto aproximado, plazos…" required></textarea>
+          </div>
+
+          <button type="submit" class="form-button">
+            Enviar mensaje
+            <Icon name="arrowRight" size={18} strokeWidth={2.2} />
+          </button>
+
+          <p class="form-status" role="status" aria-live="polite"></p>
+          <p class="form-note">Al enviar aceptas que use tus datos solo para responder tu consulta.</p>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+</BaseLayout>

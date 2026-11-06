@@ -1,0 +1,65 @@
+---
+import { site, navLinks, services } from '../data/site';
+import Icon from './Icon.astro';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <a href="/" class="logo" aria-label="Dua Marketing — Inicio">
+          <span class="logo__mark">D</span>
+          <span class="logo__text">
+            <span class="logo__name">Dua Marketing</span>
+            <span class="logo__sub">Strategy</span>
+          </span>
+        </a>
+        <p>Estrategia, contenido y publicidad para marcas que quieren ser imposibles de ignorar.</p>
+        <div class="footer__social" style="margin-top: 1.1rem;">
+          <a href={site.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram de Dua Marketing">
+            <Icon name="instagram" size={18} />
+          </a>
+          <a href={`mailto:${site.email}`} aria-label="Enviar correo a Dua Marketing">
+            <Icon name="mail" size={18} />
+          </a>
+        </div>
+      </div>
+
+      <nav class="footer__col" aria-label="Navegación del pie de página">
+        <h4>Navegación</h4>
+        <ul>
+          {navLinks.map((link) => (
+            <li><a href={link.href}>{link.label}</a></li>
+          ))}
+        </ul>
+      </nav>
+
+      <div class="footer__col">
+        <h4>Servicios</h4>
+        <ul>
+          {services.slice(0, 5).map((service) => (
+            <li><a href="/servicios">{service.title}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4>Contacto</h4>
+        <ul>
+          <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
+          <li><a href={site.instagram} target="_blank" rel="noopener noreferrer">{site.handle}</a></li>
+          <li style="color: var(--muted); font-size: .88rem;">{site.hours}</li>
+          <li style="color: var(--muted); font-size: .88rem;">Respuesta en {site.responseTime}</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <span>© {year} {site.legalName}. Todos los derechos reservados.</span>
+      <span>Hecho con estrategia y café ☕</span>
+    </div>
+  </div>
+  <div class="footer__word" aria-hidden="true">DUA®</div>
+</footer>

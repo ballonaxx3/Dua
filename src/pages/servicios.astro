@@ -1,0 +1,102 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
+import CtaPanel from '../components/CtaPanel.astro';
+import { services, processSteps, faqs } from '../data/site';
+---
+
+<BaseLayout
+  path="/servicios"
+  title="Servicios"
+  description="Gestión de redes sociales, branding, estrategia de contenidos, diseño gráfico, publicidad digital (Meta Ads) y consultoría 1:1. Conoce los servicios de Dua Marketing."
+>
+
+  {/* ══════════ HERO DE PÁGINA ══════════ */}
+  <section class="page-hero">
+    <div class="container">
+      <a href="/" class="back-link">
+        <Icon name="arrowLeft" size={15} strokeWidth={2.2} />
+        Volver al inicio
+      </a>
+      <p class="eyebrow">Servicios</p>
+      <h1 class="section-title" style="max-width: 900px;">Todo para que tu marca<br /><em>crezca de verdad</em></h1>
+      <p class="section-sub">
+        Del diagnóstico a los resultados: elige un servicio puntual o un plan completo.
+        Cada propuesta se cotiza a medida y empieza con una consulta gratuita.
+      </p>
+    </div>
+  </section>
+
+  {/* ══════════ LISTA DE SERVICIOS ══════════ */}
+  <section class="section" aria-label="Detalle de servicios">
+    <div class="container">
+      <div class="service-detail">
+        {services.map((service) => (
+          <article id={service.id} class="reveal">
+            {service.tag && <span class="service-tag">{service.tag}</span>}
+            <span class="service-detail__num">— {service.number}</span>
+            <h2>
+              <Icon name={service.icon} size={22} />
+              {service.title}
+            </h2>
+            <p>{service.desc}</p>
+            <ul>
+              {service.features.map((feature) => (
+                <li>
+                  <Icon name="check" size={13} strokeWidth={2.6} />
+                  {feature}
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* ══════════ PROCESO ══════════ */}
+  <section class="section section--surface" aria-labelledby="proceso-title">
+    <div class="container">
+      <p class="eyebrow reveal">Cómo trabajo</p>
+      <h2 id="proceso-title" class="section-title reveal" data-delay="1">Un proceso <em>claro</em>,<br />de principio a fin</h2>
+
+      <div class="steps" style="margin-top: 2.5rem;">
+        {processSteps.map((item) => (
+          <div class="step reveal">
+            <strong>PASO {item.step}</strong>
+            <h3>{item.title}</h3>
+            <p>{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* ══════════ FAQ ══════════ */}
+  <section class="section" aria-labelledby="faq-title">
+    <div class="container">
+      <p class="eyebrow reveal" style="justify-content: center; display: flex;">Preguntas frecuentes</p>
+      <h2 id="faq-title" class="section-title reveal" data-delay="1" style="text-align: center;">Lo que suelen<br /><em>preguntarme</em></h2>
+
+      <div class="faq" style="margin-top: 2.5rem;">
+        {faqs.map((item) => (
+          <details>
+            <summary>
+              {item.q}
+              <Icon name="plus" size={18} class="chev" />
+            </summary>
+            <p>{item.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* ══════════ CTA ══════════ */}
+  <section class="section" style="padding-top: 0;" aria-label="Llamada a la acción">
+    <div class="container">
+      <CtaPanel title="¿Empezamos con una consulta?" subtitle="30 minutos, gratis y sin compromiso. Sales con ideas accionables aunque no trabajemos juntos." />
+    </div>
+  </section>
+
+</BaseLayout>

@@ -1,0 +1,23 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+}
+
+const {
+  title = '¿Listo para escalar tu marca?',
+  subtitle = 'Agenda una consulta gratuita y descubre cómo llevamos tu marca al siguiente nivel.',
+} = Astro.props;
+---
+
+<div class="cta-panel reveal">
+  <h2>{title}</h2>
+  <p>{subtitle}</p>
+  <a href="/contacto" class="btn btn--dark">
+    Contactar ahora
+    <Icon name="arrowRight" size={18} strokeWidth={2} />
+  </a>
+  <p class="fineprint">Consulta gratuita · Sin compromiso · Respuesta en menos de 24h</p>
+</div>

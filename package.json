@@ -1,0 +1,16 @@
+{
+  "name": "dua-marketing-web",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Sitio web oficial de Dua Marketing — marketing digital, estrategia de marca y gestión de redes sociales.",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.2.1",
+    "astro": "^5.13.0"
+  }
+}
