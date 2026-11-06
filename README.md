@@ -1,7 +1,10 @@
 # Dua Marketing — Sitio Web
 
+**🌐 En línea: [dua-marketing.vercel.app](https://dua-marketing.vercel.app)**
+
 Sitio oficial de **Dua Marketing** (estrategia, redes sociales, branding y publicidad digital).
 Migrado a **[Astro](https://astro.build)** con diseño personalizado en CSS.
+Deploy automático en Vercel: cada push a `main` publica producción.
 
 ## Comandos
 
